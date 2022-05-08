@@ -43,7 +43,7 @@ overflow: hidden;
 #feelTemperature, #displayWindDiv{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     font-size: 2rem;
     padding: 1rem;
     
@@ -64,6 +64,7 @@ overflow: hidden;
     z-index: 1;
 	color: #fff;
 	background-color: rgba(0, 0, 0, 0.6);
+    max-width: fit-content;
 }
    
 
@@ -78,6 +79,8 @@ overflow: hidden;
 .tabIcon, .mainCardImg{
 
  max-width: 50px;
+ color: #fff;
+ margin-right: 0.5rem;
    
 }
 

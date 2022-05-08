@@ -1,6 +1,7 @@
 //to do:
 //1: 52 eilute neapdatina info: arba pakeisti sprendimą, arba apsirašyti fuinkciją, kuris atnaujins innerHTML
 //sutvarkyti css, responsiveness
+// kai bus laiko pasidaryti local storage 
 
 
 
@@ -23,6 +24,11 @@ let langList = document.getElementById('languageSelect')
         console.log(lang)
     });
 
+let unitsList = document.getElementById('unitsSelect')
+    unitsList.addEventListener('change', function(){
+        units = this.value
+        console.log(units)
+    });    
 
 // uzdedu click eventa ant search mygtuko
 
@@ -61,9 +67,10 @@ function showWeatherInDom(data) {
         console.log(data)
         
 
-        if (mainCard.innerHTML == ''){
+        if ((mainCard.innerHTML == '') && (tabContainerWrapper.innerHTML == '')){
             createMainCardElements(data)         
-        } 
+        }
+          
        
         for (let i = 1; i <= data.list.length; i += 2){
             createIndexTab(data, i)            
@@ -118,22 +125,25 @@ function createMainCardElements(data) {
     let displayWindImg = document.createElement('img')
         displayWindImg.setAttribute('class', 'mainCardImg')
         displayWindDiv.append(displayWindImg)
-        displayWindImg.src = 'resources/images/wind.svg'
+        displayWindImg.src = 'resources/images/wind coloured.svg'
         
     let displayWindText = document.createElement('div')
         displayWindText.setAttribute('id', 'displayWindText')
         displayWindDiv.append(displayWindText)    
         
     displayweatherIcon(data, 0, maincardDisplayImg)  
-                                       
-    cityDiv.innerText = data.city.name 
-    weatherDescription.innerText = data.list[0].weather[0].description
-    temperatureDiv.innerText =  data.list[0].main.temp + '°C'
-    let currentTemperatureNumber = data.list[0].main.feels_like 
-    feelTemperatureText.innerText = 'feels like'  + ' ' + currentTemperatureNumber + ' ' + '°C'
-    displayWindText.innerText =  data.list[0].wind.speed + ' ' + 'm/s'
+    let curArray =  data.list[0]                                      
+        cityDiv.innerText = data.city.name 
+        weatherDescription.innerText = curArray.weather[0].description
+        temperatureDiv.innerText =  curArray.main.temp + '°C'
+    let feelTemperatureNumber =curArray.main.feels_like 
+        feelTemperatureText.innerText = 'feels like'  + ' ' + feelTemperatureNumber + ' ' + '°C'
+        displayWindText.innerText =  curArray.wind.speed + ' ' + 'm/s'
 
-    changeLanguageInMainCard(feelTemperatureText, currentTemperatureNumber )
+    changeLanguageInMainCard(feelTemperatureText, feelTemperatureNumber, )
+
+    changeUnitsinMainCard(temperatureDiv, feelTemperatureNumber, feelTemperatureText, displayWindText, curArray )
+
     playBackgroundVideo(data, 0)
 }
 //funkcija, kuri parodo orų icon
@@ -173,11 +183,14 @@ function createIndexTab (data, index){
         tabContainer.append(windTextDiv)     
         
         tabDate.innerHTML = data.list[index].dt_txt
+
         displayweatherIcon(data, index, tabIcon)
+
         tabText.innerHTML =  data.list[index].main.temp.toFixed(1) + ' ' + '°C'
-        windIcon.src = 'resources/images/wind.svg'
+        windIcon.src = 'resources/images/wind coloured.svg'
         windTextDiv.innerText = data.list[index].wind.speed.toFixed(1) + ' ' + 'm/s'
-        
+    
+        changeUnitsInIndexTab(data, tabText, windTextDiv, index)    
 
 }
 //funkcija, kuri parenka banckround pagal pagrindines korteles icon code
@@ -204,11 +217,28 @@ function playBackgroundVideo(fetchedData, index){
     
 
 }
-
+//funkcija, kuri pakeičia kalbą in mainCard, bet veikia tik su išankstiniu nustatymu, t.y. nekeičia sukurtų elementų inner html
 function changeLanguageInMainCard(div1, div2){
     if (lang == 'lt'){
         div1.innerText = "jutiminė temperatūra" + ' ' + div2 + ' ' + '°C'
     } else if (lang == 'ru'){
         div1.innerText = "сенсорная температура" + ' ' + div2 + ' ' + '°C'
     }else (div1.innerText = "feels like" + ' ' + div2 + ' ' + '°C')
+}
+//funkcija, kuri pakeičia units in mainCard to Farenheit and feet, bet veikia tik su išankstiniu nustatymu, t.y. nekeičia sukutų elementų inner html
+function changeUnitsinMainCard(div1, div2, div3, div4, array){
+    if(units == 'imperial'){
+        div1.innerText =  array.main.temp + '°F'
+        div3.innerText = 'feels like'  + ' ' + div2 + ' ' + '°F'
+        div4.innerText =  array.wind.speed + ' ' + 'ft/s'
+    }
+    
+}
+//funkcija, kuri pakeičia units in indexTabs, bet veikia tik su išankstiniu nustatymu, t.y. nekeičia sukutų elementų inner html
+function changeUnitsInIndexTab(inputData, div1, div2, index){
+    if (units == 'imperial'){
+        div1.innerHTML =  inputData.list[index].main.temp.toFixed(1) + ' ' + '°F'
+        div2.innerText = inputData.list[index].wind.speed.toFixed(1) + ' ' + 'ft/s'
+    }
+
 }

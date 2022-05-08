@@ -1,0 +1,120 @@
+
+
+body {
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 90%;
+    object-fit: cover;
+    
+}
+#banner {
+    min-width: 100%;
+    min-height: 200px;
+    background-color: blue;
+    color: white;
+    object-fit:fill;
+    text-align: center;
+    padding-top: 2rem;
+    margin-bottom: 1rem;
+}
+#holdingContainer {
+display: flex;
+align-items: center;
+flex-direction: column;
+padding: 1rem;
+margin: 1rem;
+position: relative;
+overflow: hidden;
+
+}
+
+#weatherDescription{
+    font-size: 1.5rem;
+}
+#imgAndTempDiv  {
+    display: flex;
+    flex-direction: row;
+    font-size: 3rem;
+    font-weight: 900;
+   align-items: center;
+   padding-right: 1rem;
+}
+
+#feelTemperature, #displayWindDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 2rem;
+    padding: 1rem;
+    
+}
+
+#feelTemperature {
+    width: 80%;
+}
+
+
+#mainCard {
+    margin: 2rem 0;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: cornflowerblue;
+    padding-top: 1rem;
+    z-index: 1;
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+   
+
+#weatherDescription{
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+#cityDiv{
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+.tabIcon, .mainCardImg{
+
+ max-width: 50px;
+   
+}
+
+#tabContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    max-width: 60%;
+    background-color: tan;
+    padding: 0.5rem;
+    margin: 1rem;
+    overflow: hidden;
+    /* padarom skaidru */
+    z-index: 1;
+	padding: .5rem 1rem;
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+#video {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: auto;
+	width: auto;
+	z-index: -1;
+	transform: translateX(-50%) translateY(-50%);
+	min-width: 100%;
+	min-height: 100%;
+}
+
+#tabContainerWrapper{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#optionSelector{
+    padding: 1rem;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elements creation and manipulation with JS</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+      integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./resources/style.css" />
+    <script
+      src="https://kit.fontawesome.com/2a29aee19c.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <section id="banner">
+      <h1>Weather showcase mini app project</h1>
+      <p>
+        Enter city or location below to generate Data directly from Accuweather
+        API
+      </p>
+      <p>made using HTML, CSS and vanilla JS</p>
+      <div id="optionSelector">
+        <select name="languageSelect" id="languageSelect">
+          <option value="">Launguage</option>
+          <option value=""></option>
+          <option value="lt">Lietuvių</option>
+          <option value="ru">по-русски</option>
+          <option value="en">English</option>
+        </select>
+        <select name="unitSelect" id="unitSelect">
+          <option value="">unit system</option>
+          <option value=""></option>
+          <option value="metric">metric</option>
+          <option value="imperial">imperial</option>
+        </select>
+      </div>
+    </section>
+    <section id="main">
+      <div id="holdingContainer">
+        <video src="" id="video" autoplay muted loop></video>
+        <div id="input">
+          <input
+            type="text"
+            placeholder="enter your city name here"
+            id="city"
+          />
+          <input type="button" value="Search" id="search" />
+        </div>
+        <div id="mainCard"></div>
+        <div id="tabContainerWrapper"></div>
+      </div>
+    </section>
+    <script src="./resources/script.js"></script>
+  </body>
+</html>

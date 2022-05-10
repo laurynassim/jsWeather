@@ -17,7 +17,7 @@ body {
     padding-top: 2rem;
     margin-bottom: 1rem;
 }
-#holdingContainer {
+#main {
 display: flex;
 align-items: center;
 flex-direction: column;
@@ -84,7 +84,7 @@ overflow: hidden;
    
 }
 
-#tabContainer{
+.tabContainer{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -112,12 +112,21 @@ overflow: hidden;
 	min-height: 100%;
 }
 
-#tabContainerWrapper{
+.mainSection{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 #optionSelector{
     padding: 1rem;
+}
+.tabContainerWrapper{
+    
+    width: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
 }

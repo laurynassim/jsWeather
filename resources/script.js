@@ -12,10 +12,10 @@ let city = '' // miestas irasytas inpute
 
 let cityName = document.getElementById('city')
 let searchButton = document.getElementById('search')
-let mainCard = document.getElementById('mainCard')
-let holdingContainer = document.getElementById('holdingContainer')
+
 let mainSection = document.getElementById('main')
-let tabContainerWrapper = document.getElementById('tabContainerWrapper')
+
+
 let video = document.getElementById('video')
 
 let langList = document.getElementById('languageSelect')
@@ -66,14 +66,34 @@ function showWeatherInDom(data) {
     if (data.cod === '200') {
         console.log(data)
         
+        
+        // if ((mainCard.innerHTML == '') && (tabContainerWrapper.innerHTML == '')){
+        //     createMainCardElements(data)         
+        // }
 
-        if ((mainCard.innerHTML == '') && (tabContainerWrapper.innerHTML == '')){
-            createMainCardElements(data)         
+
+        if(document.getElementById('mainCard')){
+            document.getElementById('mainCard').remove()
         }
-          
+
+        // if(document.getElementsByClassName('tabContainerWrapper'[0])){
+        //     console.log('ar veikia')
+        //     document.getElementsByClassName('tabContainerWrapper'[0]).remove()
+        // } 
+
+        const elements = document.getElementsByClassName("tabContainerWrapper");
+
+        while (elements.length > 0) elements[0].remove();
+        
+        createMainCardElements(data)
+
+        let tabContainerWrapper = document.createElement('div')
+        tabContainerWrapper.setAttribute('class', 'tabContainerWrapper' )    
+
+       
        
         for (let i = 1; i <= data.list.length; i += 2){
-            createIndexTab(data, i)            
+            createIndexTab(data, i,  tabContainerWrapper)            
         };
       
     } else {
@@ -84,7 +104,12 @@ function showWeatherInDom(data) {
 }
 //funkcija, kuri sukuria pagrindinę kortelę
 function createMainCardElements(data) {
-            
+    
+    let mainCard = document.createElement('div')
+    mainCard.setAttribute('id', 'mainCard')
+    
+    mainSection.append(mainCard)        
+
     let cityDiv  = document.createElement('div')
         cityDiv.setAttribute('id', "cityDiv")
         mainCard.append(cityDiv)
@@ -140,11 +165,15 @@ function createMainCardElements(data) {
         feelTemperatureText.innerText = 'feels like'  + ' ' + feelTemperatureNumber + ' ' + '°C'
         displayWindText.innerText =  curArray.wind.speed + ' ' + 'm/s'
 
+        
+
     changeLanguageInMainCard(feelTemperatureText, feelTemperatureNumber, )
 
     changeUnitsinMainCard(temperatureDiv, feelTemperatureNumber, feelTemperatureText, displayWindText, curArray )
 
     playBackgroundVideo(data, 0)
+
+    
 }
 //funkcija, kuri parodo orų icon
 function displayweatherIcon(fetchedData, index, iconDiv){
@@ -153,14 +182,14 @@ function displayweatherIcon(fetchedData, index, iconDiv){
     iconDiv.src = iconUrl  
 }
 //funkcija, kuri kuria papildomas grafas
-function createIndexTab (data, index){
-    // let tabContainerWrapper = document.createElement('div')
-    //     tabContainerWrapper.setAttribute('id', 'tabContainerWrapper')
-    //     holdingContainer.append(tabContainerWrapper)
+function createIndexTab (data, index, wrapperDiv ){
+  
+        mainSection.append(wrapperDiv)
+
 
     let tabContainer =  document.createElement('div')
-        tabContainer.setAttribute('id', 'tabContainer')
-        tabContainerWrapper.append(tabContainer)
+        tabContainer.setAttribute('class', 'tabContainer')
+        wrapperDiv.append(tabContainer)
 
     let tabDate = document.createElement('div')
         tabDate.setAttribute('class', 'tabDate')
@@ -179,7 +208,7 @@ function createIndexTab (data, index){
         tabContainer.append(windIcon) 
         
     let windTextDiv = document.createElement('div')
-        windTextDiv.setAttribute('id', 'windTextDiv')
+        windTextDiv.setAttribute('class', 'windTextDiv')
         tabContainer.append(windTextDiv)     
         
         tabDate.innerHTML = data.list[index].dt_txt
@@ -229,7 +258,7 @@ function changeLanguageInMainCard(div1, div2){
 function changeUnitsinMainCard(div1, div2, div3, div4, array){
     if(units == 'imperial'){
         div1.innerText =  array.main.temp + '°F'
-        div3.innerText = 'feels like'  + ' ' + div2 + ' ' + '°F'
+        div3.innerText = 'сенсорная температура'  + ' ' + div2 + ' ' + '°F'
         div4.innerText =  array.wind.speed + ' ' + 'ft/s'
     }
     

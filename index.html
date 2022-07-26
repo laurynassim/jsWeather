@@ -13,6 +13,7 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="./resources/style.css" />
+    <link rel="stylesheet" href="./resources/">
     <script
       src="https://kit.fontawesome.com/2a29aee19c.js"
       crossorigin="anonymous"
@@ -28,22 +29,23 @@
       <p>made using HTML, CSS and vanilla JS</p>
       <div id="optionSelector">
         <select name="languageSelect" id="languageSelect">
-          <option value="">Language</option>
+          <option selected value="">Language </option>
           <option value=""></option>
-          <option value="lt">Lietuvių</option>
+          <option value="lt" >Lietuvių</option>
           <option value="ru">по-русски</option>
           <option value="en">English</option>
         </select>
         <select name="unitSelect" id="unitsSelect">
-          <option value="">units system</option>
+          <option selected value="">units system</option>
           <option value=""></option>
-          <option value="metric">metric</option>
+          <option value="metric" >metric</option>
           <option value="imperial">imperial</option>
         </select>
         
           <input
             type="text"
             placeholder="enter your city name here"
+            value = ''
             id="city"
           />
           <input type="button" value="Search" id="search" />

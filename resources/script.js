@@ -1,64 +1,56 @@
-//to do:
-//1: 52 eilute neapdatina info: arba pakeisti sprendimą, arba apsirašyti fuinkciją, kuris atnaujins innerHTML
-//sutvarkyti css, responsiveness
-// kai bus laiko pasidaryti local storage 
-
 
 
 let apiKey = 'b233735abfc7edf3a9a9f7b33ad81491' 
 let lang = 'en' // kalba
 let units = 'metric' // naudojama metrine sistema
 let city = '' // miestas irasytas inpute
-
+document.getElementById('city').value = localStorage.getItem('city')
 let cityName = document.getElementById('city')
 let searchButton = document.getElementById('search')
-
 let mainSection = document.getElementById('main')
-
-
 let video = document.getElementById('video')
-
 let langList = document.getElementById('languageSelect')
-    langList.addEventListener('change', function(){
-        lang = this.value
-        console.log(lang)
-    });
 
+langList.value = localStorage.getItem('lang')
+langList.addEventListener('change', function(){
+    lang = this.value
+    localStorage.setItem('lang', this.value) 
+});
 let unitsList = document.getElementById('unitsSelect')
-    unitsList.addEventListener('change', function(){
-        units = this.value
-        console.log(units)
-    });    
+unitsList.value = localStorage.getItem('units')
+unitsList.addEventListener('change', function(){
+    units = this.value
+    localStorage.setItem('units', this.value)
+}); 
 
 // uzdedu click eventa ant search mygtuko
-
 searchButton.addEventListener('click', getDataFromApi)
-
-
 // funkcija kuri gauna duomenis is API
-function getDataFromApi() {
+async function getDataFromApi() {
     // paimu irasyta miesta is input ir nustatau
     
     city = cityName.value
-
+    localStorage.setItem('city', city)
     // url yra skirtas pasiimti duomenis is api
     let url = 'https://api.openweathermap.org/data/2.5/forecast?' +
-        'q=' + city +
-        '&units=' + units +
-        '&lang=' + lang +
-        '&appid=' + apiKey
-
+    'q=' + city +
+    '&units=' + units +
+    '&lang=' + lang +
+    '&appid=' + apiKey
+    
     // su fetch funkcija pasiimu duomenis is api (asinchronine funkcija)
-    fetch(url)
-        .then(response => response.json())
-        // data => jusu kodas
-        .then(function (data) {
-            //paduodu gautus duomenis i funkcija
-            showWeatherInDom(data)
-        });
+    // fetch(url)
+    //     .then(response => response.json())
+    //     // data => jusu kodas
+    //     .then(function (data) {
+        //         //paduodu gautus duomenis i funkcija
+        //         showWeatherInDom(data)
+        //     });
         
+        let response = await fetch (url)
+        let data = await response.json()
+    showWeatherInDom(data)
 }
-
 // funkcija kuri gauna duomenis ir juos atvaizduoja
 function showWeatherInDom(data) {
     // tikrinu ar mano response yra geras
@@ -76,9 +68,9 @@ function showWeatherInDom(data) {
             document.getElementById('mainCard').remove()
         }
 
-        // if(document.getElementsByClassName('tabContainerWrapper'[0])){
+        // if(document.getElementsByClassName('tabContainerWrapper')[0]){
         //     console.log('ar veikia')
-        //     document.getElementsByClassName('tabContainerWrapper'[0]).remove()
+        //    document.getElementsByClassName('tabContainerWrapper')[0].remove()
         // } 
 
         const elements = document.getElementsByClassName("tabContainerWrapper");
@@ -170,6 +162,8 @@ function createMainCardElements(data) {
     changeLanguageInMainCard(feelTemperatureText, feelTemperatureNumber, )
 
     changeUnitsinMainCard(temperatureDiv, feelTemperatureNumber, feelTemperatureText, displayWindText, curArray )
+
+    
 
     playBackgroundVideo(data, 0)
 

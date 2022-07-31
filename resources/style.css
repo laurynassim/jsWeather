@@ -3,7 +3,7 @@
 body {
     box-sizing: border-box;
     margin: 0 auto;
-    max-width: 90%;
+    max-width: 100%;
     object-fit: cover;
     
 }
@@ -15,14 +15,12 @@ body {
     object-fit:fill;
     text-align: center;
     padding-top: 2rem;
-    margin-bottom: 1rem;
 }
 #main {
 display: flex;
 align-items: center;
 flex-direction: column;
 padding: 1rem;
-margin: 1rem;
 position: relative;
 overflow: hidden;
 
@@ -129,4 +127,25 @@ overflow: hidden;
     flex-wrap: wrap;
     justify-content: center;
     
+}
+@media(max-width:600px){
+    .tabContainerWrapper{
+        margin: 0;
+    }
+    .tabContainer{
+        max-width: 80%;
+    }
+    #optionSelector{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    #optionSelector select{
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    #city{
+        text-align: center;
+        margin-bottom: 10px;
+    }
 }
